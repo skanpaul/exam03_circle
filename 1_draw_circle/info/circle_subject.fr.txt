@@ -1,9 +1,17 @@
 Assignment name  : mini_paint
 Expected files   : *.c *.h
-Allowed functions: fopen, fread, fscanf, fclose, write, malloc, calloc, realloc, free, memset, powf, sqrtf
+Allowed functions:
+- fopen, fread, fscanf, fclose, 
+- write, 
+- malloc, calloc, realloc, free, memset, 
+- powf, sqrtf
 --------------------------------------------------------------------------------------
 
 Ecrire un programme qui prendra en parametre un "fichier d'operations" et affichera le resultat dans le terminal
+
+--------------------------------------------------------------------------------------
+POINT (01)
+==========
 
 Votre programme ne prendra qu un seul argument, ce sera le chemin vers le "fichier d'operations"
 Si votre programme recoit 0 ou plus de 1 argument il devra afficher "Error: argument" suivi d'un \n dans STDOUT
@@ -14,22 +22,46 @@ $> ./mini_paint do not fear mathematics | cat -e
 Error: argument$
 $> 
 
+--------------------------------------------------------------------------------------
+POINT (02)
+==========
+
 Si votre programme rencontre un probleme quand il ouvre ou bien lit le "fichier d'operation", il devra écrire "Error: Operation file corrupted" suivi d'un \n dans STDOUT
 
+--------------------------------------------------------------------------------------
 Le "fichier d'operation" sera composé d'une opération par ligne
-Si une ligne n'est pas correct, alors c'est qu'un probleme vient d'avoir lieu
-Si votre programme à un probleme il doit renvoyer 1
-Si votre programme n'a pas rencontré de probleme, il doit renvoyer 0
-La derniere ligne du fichier ne sera pas forcement terminée par un \n
+
+POINT (03): Si une ligne n'est pas correct, alors c'est qu'un probleme vient d'avoir lieu
+POINT (04): Si votre programme à un probleme il doit renvoyer 1
+POINT (05): Si votre programme n'a pas rencontré de probleme, il doit renvoyer 0
+POINT (06): La derniere ligne du fichier ne sera pas forcement terminée par un \n
+
 Les lignes doivent etre lu dans l'ordre et par consequent les operations doivent etre executées dans le meme ordre
 Il doit y avoir au moins un espace entre chaque variable d'une ligne
 
+--------------------------------------------------------------------------------------
+
 WIDTH HEIGHT BACKGROUND_CHAR
-Cette ligne sera toujours la premiere ligne du fichier et elle definie la zone dites "de dessin". Votre programme ne devrait rien afficher en dehors de cette "zone de dessin". Cette ligne ne sera presente qu une fois.
-- WIDTH: doit etre un int tel que 0 < WIDTH <= 300, C est le nombre de caractères horizontaux utilisés pour la zone de dessin
-- HEIGHT: doit etre un int tel que 0 < HEIGHT <= 300, C est le nombre de caractères verticaux utilisés pour la zone de dessin
+
+Cette ligne sera toujours la premiere ligne du fichier et elle definie la zone dites "de dessin".
+Votre programme ne devrait rien afficher en dehors de cette "zone de dessin".
+Cette ligne ne sera presente qu une fois.
+
+POINT (07):
+==========
+- WIDTH: doit etre un int tel que 0 < WIDTH <= 300. 
+C'est le nombre de caractères horizontaux utilisés pour la zone de dessin
+
+POINT (08):
+==========
+- HEIGHT: doit etre un int tel que 0 < HEIGHT <= 300. 
+C'est le nombre de caractères verticaux utilisés pour la zone de dessin
+
+POINT (09):
+==========
 - BACKGROUND_CHAR: Par defaut toutes la "zone de dessin" est rempli avec BACKGROUND_CHAR
 
+--------------------------------------------------------------------------------------
 c X Y RADIUS CHAR
 Cette operation fera dessiné un cercle vide, ou seulement la bordure du cercle est dessinée
 - c: le caractère c
@@ -38,6 +70,7 @@ Cette operation fera dessiné un cercle vide, ou seulement la bordure du cercle 
 - RADIUS: un float positif different de 0, le rayon du cercle
 - CHAR: un char, le caractère utilisé pour dessiner le cercle
 
+--------------------------------------------------------------------------------------
 C X Y RADIUS  CHAR
 Cette operation fera dessiné un cercle plein
 - C: le caractère C
@@ -46,6 +79,7 @@ Cette operation fera dessiné un cercle plein
 - RADIUS: un float positif different de 0, le rayon du cercle
 - CHAR: un char, le caractère utilisé pour dessiner le cercle
 
+--------------------------------------------------------------------------------------
 La "zone de dessin" est divisé en rectangle qui peuvent chacun contenir un seul caractère (c'est parce qu'on est dans un terminal...) nous les appelerons pixel
 Pour faciliter les calculs nous n'utiliserons que le coin en haut à gauche d'un pixel pour savoir si celui ci est dans un cercle ou pas
 Si le coin en haut a gauche d'un pixel est à une distance inferieur ou égale au rayon d'un cercle, il fait alors parti de ce cercle
