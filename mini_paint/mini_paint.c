@@ -99,14 +99,14 @@ void draw_shape(t_zone_info *zi, char *map, t_shape_info *shape)
 /* ************************************************************************** */
 int draw_shapes(FILE *file, t_zone_info *zi, char *map)
 {
-	t_shape_info	tmp;
+	t_shape_info	si;
 	int		ret;
 
-	while ((ret = fscanf(file, "%c %f %f %f %c\n", &tmp.type, &tmp.x, &tmp.y, &tmp.radius, &tmp.color)) == 5)
+	while ((ret = fscanf(file, "%c %f %f %f %c\n", &si.type, &si.x, &si.y, &si.radius, &si.color)) == 5)
 	{
-		if (tmp.radius <= 0.00000000 || (tmp.type != 'c' && tmp.type != 'C'))
+		if (si.radius <= 0.00000000 || (si.type != 'c' && si.type != 'C'))
 			return (0);
-		draw_shape(zi, map, &tmp);
+		draw_shape(zi, map, &si);
 	}
 	if (ret != -1)
 		return (0);
