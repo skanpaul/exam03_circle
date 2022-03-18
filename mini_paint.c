@@ -3,19 +3,21 @@
 
 /* ************************************************************************** */
 #define NO_ERROR	0
-
 #define ERROR		1
 #define ERROR_FILE	2
-/* ************************************************************************** */
 
+/* ************************************************************************** */
+#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+
 /* ************************************************************************** */
 typedef struct s_zone
 {
 	int w;
 	int h;
 	char background;
+    int total;
 }	t_zone;
 
 /* ************************************************************************** */
@@ -28,7 +30,7 @@ int main(int argc, char **argv)
 {
 	char	*filename;
 	FILE	*ptr_file;
-	char	*map
+	char	*map;
 	t_zone	z;
 
 	// check ARG -------------------------------------------
@@ -54,7 +56,8 @@ int main(int argc, char **argv)
 	}
 
 	// create map -------------------------------------------
-	// create map;
+    z.total = z.w * z.h;
+    map = (char *)malloc(z.total * sizeof(char));
 
 
 
