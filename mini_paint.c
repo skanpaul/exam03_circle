@@ -20,6 +20,15 @@ typedef struct s_zone
 	char background;
 	int total;
 } t_zone;
+/* ************************************************************************** */
+typedef struct s_circle
+{
+	char	type;
+	float	ctr_x;
+	float	ctr_y;
+	float	radius;
+	char	char_drawn;
+} t_circle;
 
 /* ************************************************************************** */
 int ft_strlen(char *str)
@@ -101,6 +110,8 @@ int main(int argc, char **argv)
 	FILE *ptr_file;
 	char *map;
 	t_zone z;
+	t_circle c;
+	int result;
 
 	// check ARG -------------------------------------------
 	if (argc == 1 || argc > 2)
@@ -116,7 +127,7 @@ int main(int argc, char **argv)
 		return (ERROR);
 	}
 	// get zone information --------------------------------
-	if (fscanf(ptr_file, "%d %d %c", &z.w, &z.h, &z.background) != 3)
+	if (fscanf(ptr_file, "%d %d %c\n", &z.w, &z.h, &z.background) != 3)
 		return (ERROR);
 	// check zone information ------------------------------
 	if ((z.w <= 0) || (z.w > MAX_W) || (z.h <= 0) || (z.h > MAX_H))
@@ -135,7 +146,13 @@ int main(int argc, char **argv)
 	print_map(map, &z);
 
 	// get circle information ------------------------------
-	if ((fscanf(ptr_file, "%c %f %f %f %c")) != 5)
+
+	// if (
+	// 	(fscanf(ptr_file, "%c %f %f %f %c",
+	// 	&c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn)) != 5)
+	result = fscanf(ptr_file, "%c %f %f %f %c\n",
+		&c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn);
+	if (result != 5)
 	{
 		ft_free_null(&map);
 		return (ERROR);
@@ -144,9 +161,9 @@ int main(int argc, char **argv)
 
 
 
-	
 
-end:
+
+// end:
 	// close file ------------------------------------------
 	fclose(ptr_file);
 	ft_free_null(&map);
