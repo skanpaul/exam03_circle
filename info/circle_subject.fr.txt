@@ -32,8 +32,11 @@ Si votre programme rencontre un probleme quand il ouvre ou bien lit le "fichier 
 Le "fichier d'operation" sera composé d'une opération par ligne
 
 POINT (03): Si une ligne n'est pas correct, alors c'est qu'un probleme vient d'avoir lieu
+
 POINT (04): Si votre programme à un probleme il doit renvoyer 1
+
 POINT (05): Si votre programme n'a pas rencontré de probleme, il doit renvoyer 0
+
 POINT (06): La derniere ligne du fichier ne sera pas forcement terminée par un \n
 
 Les lignes doivent etre lu dans l'ordre et par consequent les operations doivent etre executées dans le meme ordre
