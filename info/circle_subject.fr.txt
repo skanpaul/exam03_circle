@@ -74,9 +74,9 @@ Cercle VIDE
 c X Y RADIUS CHAR
 Cette operation fera dessiné un cercle vide, ou seulement la bordure du cercle est dessinée
 - POINT (11): c: le caractère c
-- POINT (12): X: un float, la position horizontale du centre du cercle
-- POINT (13): Y: un float, la position verticale du centre du cercle
-- POINT (14): RADIUS: un float positif different de 0, le rayon du cercle
+- POINT (12): X: un FLOAT, la position horizontale du centre du cercle
+- POINT (13): Y: un FLOAT, la position verticale du centre du cercle
+- POINT (14): RADIUS: un FLOAT positif different de 0, le rayon du cercle
 - POINT (15): CHAR: un char, le caractère utilisé pour dessiner le cercle
 
 --------------------------------------------------------------------------------------
@@ -85,9 +85,9 @@ Cercle PLEIN
 C X Y RADIUS  CHAR
 Cette operation fera dessiné un cercle plein
 - POINT (16): C: le caractère C
-- POINT (17): X: un float, la position horizontale du centre du cercle
-- POINT (18): Y: un float, la position verticale du centre du cercle
-- POINT (19): RADIUS: un float positif different de 0, le rayon du cercle
+- POINT (17): X: un FLOAT, la position horizontale du centre du cercle
+- POINT (18): Y: un FLOAT, la position verticale du centre du cercle
+- POINT (19): RADIUS: un FLOAT positif different de 0, le rayon du cercle
 - POINT (20): CHAR: un char, le caractère utilisé pour dessiner le cercle
 
 --------------------------------------------------------------------------------------

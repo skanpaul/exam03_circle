@@ -8,9 +8,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                // "-Wall",
-                // "-Wextra",
-                // "-Werror",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
