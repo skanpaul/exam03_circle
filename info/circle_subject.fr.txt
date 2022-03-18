@@ -47,22 +47,26 @@ Il doit y avoir au moins un espace entre chaque variable d'une ligne
 WIDTH HEIGHT BACKGROUND_CHAR
 
 Cette ligne sera toujours la premiere ligne du fichier et elle definie la zone dites "de dessin".
-POINT (07):Votre programme ne devrait rien afficher en dehors de cette "zone de dessin".
+
+POINT (07):
+==========
+Votre programme ne devrait rien afficher en dehors de cette "zone de dessin".
 Cette ligne ne sera presente qu une fois.
 
 POINT (08):
 ==========
-- WIDTH: doit etre un int tel que 0 < WIDTH <= 300. 
+- WIDTH: doit etre un INT tel que 0 < WIDTH <= 300. 
 C'est le nombre de caractères horizontaux utilisés pour la zone de dessin
 
 POINT (09):
 ==========
-- HEIGHT: doit etre un int tel que 0 < HEIGHT <= 300. 
+- HEIGHT: doit etre un INT tel que 0 < HEIGHT <= 300. 
 C'est le nombre de caractères verticaux utilisés pour la zone de dessin
 
 POINT (10):
 ==========
-- BACKGROUND_CHAR: Par defaut toutes la "zone de dessin" est rempli avec BACKGROUND_CHAR
+- BACKGROUND_CHAR: 
+Par defaut toutes la "zone de dessin" est rempli avec BACKGROUND_CHAR
 
 --------------------------------------------------------------------------------------
 Cercle VIDE

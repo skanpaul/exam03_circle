@@ -1,11 +1,22 @@
+#define MAX_H 300
+#define MAX_W 300
 
+/* ************************************************************************** */
+#define NO_ERROR	0
 
-#define NO_ERROR 0
-#define ERROR 1
-#define ERROR_FILE 2
+#define ERROR		1
+#define ERROR_FILE	2
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+/* ************************************************************************** */
+typedef struct s_zone
+{
+	int w;
+	int h;
+	char background;
+}	t_zone;
 
 /* ************************************************************************** */
 int		ft_strlen(char *str);
@@ -15,27 +26,41 @@ void	print_err_file(void);
 /* ************************************************************************** */
 int main(int argc, char **argv)
 {
-	char *filename;
-	FILE *ptr_file;
+	char	*filename;
+	FILE	*ptr_file;
+	char	*map
+	t_zone	z;
 
-	// -----------------------------------------------------
+	// check ARG -------------------------------------------
 	if (argc == 1 || argc > 2)
 	{
 		print_err_arg();
 		return (ERROR);
 	}
-
-	// -----------------------------------------------------
-	// open file
+	// open file -------------------------------------------
 	filename = argv[1];
 	if((ptr_file = fopen(filename, "r")) == NULL)
 	{
 		print_err_file();
 		return (ERROR);
 	}
+	// get zone information --------------------------------
+	if (fscanf(ptr_file, "%d %d %c", &z.w, &z.h, &z.background) != 3)
+		return (ERROR);
+	// check zone information ------------------------------
+	if ((z.w <= 0) || (z.w > MAX_W) || (z.h <= 0) || (z.h > MAX_H))
+	{
+		return (ERROR);
+	}
 
-	// -----------------------------------------------------
-	//close file
+	// create map -------------------------------------------
+	// create map;
+
+
+
+
+
+	// close file ------------------------------------------
 	fclose(ptr_file);
 	// -----------------------------------------------------
 	return (NO_ERROR);
