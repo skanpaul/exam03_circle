@@ -11,13 +11,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <string.h>
+#include <math.h>
 
 /* ************************************************************************** */
 typedef struct s_zone
 {
-	int w;
-	int h;
-	char background;
+	int width;
+	int height;
+	char back;
 	int total;
 } t_zone;
 /* ************************************************************************** */
@@ -77,32 +79,109 @@ void clean_all(char **map, FILE *ptr_file)
 }
 
 /* ************************************************************************** */
-void fill_background(char *map, t_zone *z)
-{
-	int i;
-	
-	i = 0;
-	while (i < z->total)
-	{
-		map[i] = z->background;
-		i++;
-	}
-}
-
-/* ************************************************************************** */
 void print_map(char *map, t_zone *z)
 {
 	int i;
 	
 	i = 0;
-	while (i < z->h)
+	while (i < z->height)
 	{
-		write(1, (map + i * z->w), z->w);
+		write(1, (map + i * z->width), z->width);
 		write(1, "\n", 1);
 		i++;
 	}
 }
+/* ************************************************************************** */
+float get_distance_p_to_c(int x, int y, t_circle *c)
+{
+	float distance;
+	float delta_x;
+	float delta_y;
 
+	delta_x = (float)x - c->ctr_x;
+	delta_y = (float)y - c->ctr_y;	
+
+	distance = sqrtf(powf(delta_x, 2) + powf(delta_y, 2));
+
+	return (distance);
+}
+/* ************************************************************************** */
+bool is_in_disc(int x, int y, t_circle *c)
+{
+	float	distance;
+
+	distance = get_distance_p_to_c(x, y, c);	
+
+	if (distance <= c->radius)
+		return (true);
+
+	return (false);
+}
+
+/* ************************************************************************** */
+bool is_on_edge(int x, int y, t_circle *c)
+{
+	float	delta_p_to_center;
+	float	delta_p_to_edge;
+
+	delta_p_to_center = get_distance_p_to_c(x, y, c);
+
+	delta_p_to_edge = c->radius - delta_p_to_center;
+
+	if ( delta_p_to_edge < 1)
+		return (true);
+
+	return (false);
+}
+
+/* ************************************************************************** */
+// bool is_out(int x, int y, t_circle *c)
+// {
+// 	float	distance;
+
+// 	distance = get_distance_p_to_c(x, y, c);
+
+// 	if ((distance - c->radius) >= 1)
+// 		return (true);
+
+// 	return (false);
+// }
+
+/* ************************************************************************** */
+void fill_map_with_circle(t_circle *c, char *map, t_zone *z)
+{
+    int x;
+    int y;
+	bool edge;
+	bool disc;
+
+	y = 0;
+    while (y < z->height)
+    {
+		x = 0;
+        while (x < z->width)
+        {
+			edge = is_on_edge(x, y, c);
+			disc = is_in_disc(x, y, c);
+			
+			if (is_in_disc(x, y, c))
+			{
+				if ((c->type == 'c') && edge)
+					map[x + y * z->width] = c->char_drawn;						
+				
+				if ((c->type == 'C') && disc)
+					map[x + y * z->width] = c->char_drawn;		
+				// print_map(map, z);
+			}
+
+            x++;
+        }
+        y++;
+    }
+}
+
+/* ************************************************************************** */
+/* ************************************************************************** */
 /* ************************************************************************** */
 int main(int argc, char **argv)
 {
@@ -127,51 +206,42 @@ int main(int argc, char **argv)
 		return (ERROR);
 	}
 	// get zone information --------------------------------
-	if (fscanf(ptr_file, "%d %d %c\n", &z.w, &z.h, &z.background) != 3)
+	if (fscanf(ptr_file, "%d %d %c\n", &z.width, &z.height, &z.back) != 3)
 		return (ERROR);
 	// check zone information ------------------------------
-	if ((z.w <= 0) || (z.w > MAX_W) || (z.h <= 0) || (z.h > MAX_H))
+	if ((z.width <= 0) || (z.width > MAX_W)
+    || (z.height <= 0) || (z.height > MAX_H))
 	{
 		return (ERROR);
 	}
-	// create map -------------------------------------------
-	z.total = z.w * z.h;
+	// create map ------------------------------------------
+	z.total = z.width * z.height;
 	if ((map = (char *)malloc(z.total * sizeof(char))) == NULL)
 	{
 		ft_free_null(&map);
 		return (ERROR);
 	}
-	// fill background of map ------------------------------
-	fill_background(map, &z);
-	print_map(map, &z);
+	// fill back of map ------------------------------------
+	memset(map, (int)z.back, z.total);
 
 	// get circle information ------------------------------
-
-	// if (
-	// 	(fscanf(ptr_file, "%c %f %f %f %c",
-	// 	&c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn)) != 5)
-	result = fscanf(ptr_file, "%c %f %f %f %c\n",
-		&c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn);
-	if (result != 5)
+	result = fscanf(ptr_file, "%c %f %f %f %c\n", &c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn);
+	if ((result != 5) || ((c.type != 'c') && (c.type != 'C')))
 	{
 		ft_free_null(&map);
 		return (ERROR);
 	}
+	// fill map with circle --------------------------------
+	fill_map_with_circle(&c, map, &z);
 
+	// print map -------------------------------------------
+	print_map(map, &z);
 
-
-
-
-
-// end:
 	// close file ------------------------------------------
 	fclose(ptr_file);
 	ft_free_null(&map);
+
 	// -----------------------------------------------------
-
-
-
-
 	return (NO_ERROR);
 }
 

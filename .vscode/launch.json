@@ -10,7 +10,9 @@
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [
-                "examples/1"
+                // "examples/1"
+                // "examples/2"
+                "examples/Sorakann"
             ],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",

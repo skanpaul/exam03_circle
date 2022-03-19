@@ -12,6 +12,7 @@
                 "-Wextra",
                 "-Werror",
                 "${file}",
+                "-lm",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
