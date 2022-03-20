@@ -12,7 +12,8 @@
             "args": [
                 // "examples/1"
                 // "examples/2"
-                "examples/Sorakann"
+                // "examples/Sorakann"
+                "example_"
             ],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",

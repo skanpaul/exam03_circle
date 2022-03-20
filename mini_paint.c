@@ -178,6 +178,7 @@ void fill_map_with_circle(t_circle *c, char *map, t_zone *z)
         }
         y++;
     }
+	// print_map(map, z);
 }
 
 /* ************************************************************************** */
@@ -224,15 +225,40 @@ int main(int argc, char **argv)
 	// fill back of map ------------------------------------
 	memset(map, (int)z.back, z.total);
 
-	// get circle information ------------------------------
-	result = fscanf(ptr_file, "%c %f %f %f %c\n", &c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn);
-	if ((result != 5) || ((c.type != 'c') && (c.type != 'C')))
+
+
+
+	while ((result = fscanf(ptr_file, "%c %f %f %f %c\n", &c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn)) == 5)
 	{
-		ft_free_null(&map);
-		return (ERROR);
+		if ((c.type != 'c') && (c.type != 'C'))
+		{
+			ft_free_null(&map);
+			return (ERROR);
+		}
+		fill_map_with_circle(&c, map, &z);
 	}
-	// fill map with circle --------------------------------
-	fill_map_with_circle(&c, map, &z);
+
+	// print_map(map, &z);
+
+	// if (result != 5)
+	// {
+	// 	ft_free_null(&map);
+	// 	return (ERROR);
+	// }
+
+
+
+
+
+	// // get circle information ------------------------------
+	// result = fscanf(ptr_file, "%c %f %f %f %c\n", &c.type, &c.ctr_x, &c.ctr_y, &c.radius, &c.char_drawn);
+	// if ((result != 5) || ((c.type != 'c') && (c.type != 'C')))
+	// {
+	// 	ft_free_null(&map);
+	// 	return (ERROR);
+	// }
+	// // fill map with circle --------------------------------
+	// fill_map_with_circle(&c, map, &z);
 
 	// print map -------------------------------------------
 	print_map(map, &z);
